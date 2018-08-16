@@ -36,6 +36,35 @@ a {
     font-size: 80%;
 }
 
+.button-success,
+.button-error,
+.button-warning,
+.button-secondary {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button-success {
+    background: rgb(28, 184, 65);
+    /* this is a green */
+}
+
+.button-error {
+    background: rgb(202, 60, 60);
+    /* this is a maroon */
+}
+
+.button-warning {
+    background: rgb(223, 117, 20);
+    /* this is an orange */
+}
+
+.button-secondary {
+    background: rgb(66, 184, 221);
+    /* this is a light blue */
+}
+
 /*
  * -- LAYOUT STYLES --
  * This layout consists of three main elements, `#nav` (navigation bar), `#list` (note list), and `#main` (note content). All 3 elements are within `#layout`
@@ -76,6 +105,156 @@ a {
     padding: 2em 0;
 }
 
+/* the menu if fixed on the bottom */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  display: flex;
+  height: 50px;
+  box-shadow: 0 -2px 5px -2px #333;
+  background-color: #fff;
+}
+.mobile-bottom-nav__item {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.mobile-bottom-nav__item--active {
+  color: red;
+}
+.mobile-bottom-nav__item-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Search icon STYLES */
+#search-icon {
+  width: 100%;
+  height: 100%;
+  background-color: #303535;
+}
+
+#search-icon:hover {
+  cursor: pointer;
+}
+
+.circle,
+.line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: all 0.25s ease-in-out;
+  transform: translate(-50%, -50%);
+}
+
+#circle-big {
+  width: 32px;
+  height: 32px;
+  /* background-color: #fff; */
+  background-color: #303535;
+  border-radius: 32px;
+
+}
+
+#circle-big.change {
+    background-color: #fff;
+}
+
+#circle-small {
+  width: 26px;
+  height: 26px;
+  background-color: #fff;
+  border-radius: 26px;
+}
+
+#circle-small.change {
+  width: 0;
+  height: 0;
+}
+
+.line {
+  width: 3px;
+  height: 14px;
+  background-color: #303535;
+  border-radius: 3px;
+}
+
+#line-left {
+  display: none;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+#line-left.change {
+  display: block;
+  background-color: #303535;
+}
+
+#line-right {
+  top: 27.4px;
+  left: 27.4px;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+#line-right.change {
+  top: 50%;
+  left: 50%;
+  background-color: #303535;
+}
+
+/* search box*/
+
+#full-search {
+    /* height: 100%; */
+    width: 100%;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0, 0.3);
+}
+
+#full-search.change {
+    display: block;
+}
+
+#full-search input[type=text] {
+    padding: 15px 0px;
+    font-size: 17px;
+    border: none;
+    outline: none; /* focus时，无边框 */
+    float: left;
+    width: 100%;
+    background: #f1f1f1;
+    text-align: center;
+}
+
+#full-search input[type=text]:hover {
+    background: #f1f1f1;
+}
+
+#full-search button {
+    float: left;
+    width: 20%;
+    padding: 15px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+#full-search button:hover {
+    background: #bbb;
+}
 
 /*
  * -- NAV BAR STYLES --
@@ -245,7 +424,9 @@ a {
         overflow: auto;
         width: auto; /* so that it's not 100% */
     }
-
+    .mobile-bottom-nav{
+        display: none;
+    }
 }
 
 /*

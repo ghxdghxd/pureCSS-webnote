@@ -7,8 +7,13 @@
     <title>Note &ndash; Layout Examples &ndash; Pure</title>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <link rel="stylesheet" href="css/note.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+
+<form id="full-search">
+    <input type="text" id="full-search-text" placeholder="好记性不如烂键盘" name="search">
+</form>
 
 <div id="layout" class="content pure-g">
     <div id="nav" class="pure-u">
@@ -34,7 +39,8 @@
     </div>
 
     <div id="list" class="pure-u-1">
-        <div class="note-item note-item-selected pure-g">
+        <!-- <div class="note-item note-item-selected pure-g"> -->
+        <div class="note-item pure-g">
             <div class="pure-u">
                 <img width="64" height="64" alt="Tilo Mitra&#x27;s avatar" class="note-avatar" src="img/tilo-avatar.png">
             </div>
@@ -48,7 +54,8 @@
             </div>
         </div>
 
-        <div class="note-item note-item-unread pure-g">
+        <!-- <div class="note-item note-item-unread pure-g"> -->
+        <div class="note-item pure-g">
             <div class="pure-u">
                 <img width="64" height="64" alt="Eric Ferraiuolo&#x27;s avatar" class="note-avatar" src="img/ericf-avatar.png">
             </div>
@@ -62,7 +69,8 @@
             </div>
         </div>
 
-        <div class="note-item note-item-unread pure-g">
+        <!-- <div class="note-item note-item-unread pure-g"> -->
+        <div class="note-item pure-g">
             <div class="pure-u">
                 <img width="64" height="64" alt="YUI&#x27;s avatar" class="note-avatar" src="img/yui-avatar.png">
             </div>
@@ -172,7 +180,45 @@
     </div>
 </div>
 
+<nav class="mobile-bottom-nav">
+    <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+        <div class="mobile-bottom-nav__item-content">
+            最近
+        </div>
+    </div>
+    <div class="mobile-bottom-nav__item">
+        <div class="mobile-bottom-nav__item-content">
+            文件夹
+        </div>
+    </div>
+    <div class="mobile-bottom-nav__item">
+        <div class="mobile-bottom-nav__item-content">
+            <div id="search-icon">
+                <div id="circle-big" class="circle"></div>
+                <div id="circle-small" class="circle">
+                    <div id="line-left" class="line"></div>
+                    <div id="line-right" class="line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-bottom-nav__item">
+        <div class="mobile-bottom-nav__item-content">
+            标签
+        </div>
+    </div>
+    <div class="mobile-bottom-nav__item">
+        <div class="mobile-bottom-nav__item-content">
+            个人
+        </div>
+    </div>
+</nav>
+
 <script src="https://yui-s.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+<script src="js/index.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
 <script>
     YUI().use('node-base', 'node-event-delegate', function (Y) {
 
