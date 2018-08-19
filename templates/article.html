@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }} | {{ SITENAME }}{% endblock title %}
+
+{% block content %}
+<div class="note-content-header pure-g">
+    <div class="pure-u-1-2">
+        <h1 class="note-content-title">{{ article.title }}</h1>
+        <div class="note-content-subtitle">
+            {{ article.date|strftime('%b %d, %Y') }}
+            {% if category %}
+            <span> | </span> <a href="/{{ category.url }}">{{ category }}</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="note-content-controls pure-u-1-2">
+        {% for tag in article.tags %}
+        <a class="secondary-button pure-button" href="/{{ tag.url }}">{{ tag }}</a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="note-content-body">
+{{ article.content }}
+</div>
+
+{% endblock content %}

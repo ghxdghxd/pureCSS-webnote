@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block item %}
+
+{% for article in articles %}
+<!-- <div onclick="window.open('/{{ article.url }}','_self')" class="note-item pure-g"> -->
+    {% if loop.first %}
+        <div class="note-item pure-g note-item-selected">
+    {% else %}
+        <div class="note-item pure-g">
+    {% endif %}
+    <!-- <div class="pure-u">
+        <img width="64" height="64" alt="{{article.category}}" class="note-avatar" src="/{{ THEME_STATIC_DIR }}/img/{{article.category}}.png">
+    </div> -->
+    <div class="pure-u-3-4">
+        <h4 class="note-subject"><a href="{{ article.url}}">{{ article.title}}</a></h4>
+        <h5 class="note-name">{{ article.date|strftime('%Y/%m/%d') }}</h5>
+        <span class="note-desc">{{ article.summary}}</span>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock item %}

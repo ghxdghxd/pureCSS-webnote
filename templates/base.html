@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example that shows off a responsive note layout.">
+    <title>{{SITENAME}}</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/note.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+        crossorigin="anonymous">
+    {% if 'tipue_search' in PLUGINS %}
+    <link href="/{{ THEME_STATIC_DIR }}/tipuesearch/css/tipuesearch.css" rel="stylesheet">
+    {% endif %}
+</head>
+<body>
+
+<form id="full-search" action="/search.html" accept-charset="utf-8" >
+    <input type="text" id="tipue_search_input" placeholder="好记性不如烂键盘" name="q">
+</form>
+
+<div id="layout" class="content pure-g">
+    <div id="nav" class="pure-u">
+        <a href="javascript:void(0);" class="nav-menu-button">Menu</a>
+
+        <div class="nav-inner">
+            <button class="primary-button pure-button">Compose</button>
+
+            <div class="pure-menu">
+                <ul class="pure-menu-list">
+                    {% set MENUS_TMP = MENUITEMS or (('Home', '.', 'fa-home'), ('Archive', 'archives.html', 'fa-archive')) %}
+                    {% set MENUS_URL = MENUS_TMP|map(attribute=1)|list%}
+                    {% for title, link, fa in MENUS_TMP %}
+                    {% if link==output_file or (link=='.' and output_file not in MENUS_URL) %}
+                    <li class="pure-menu-item pure-menu-selected"><a href="/{{ link }}" class="pure-menu-link"> {{ title }}</a></li>
+                    <!-- <a href="/{{ link }}" class="current"><i class="fa {{ fa }}"> {{ title }}</i></a> -->
+                    {% else %}
+                    <li class="pure-menu-item"><a href="/{{ link }}" class="pure-menu-link"> {{ title }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    <!-- <li class="pure-menu-item"><a href="javascript:void(0);" class="pure-menu-link">主页 <span class="note-count">(2)</span></a></li>
+                    <li class="pure-menu-heading">Labels</li>
+                    <li class="pure-menu-item"><a href="javascript:void(0);" class="pure-menu-link"><span class="note-label-personal"></span>Personal</a></li>
+                    <li class="pure-menu-item"><a href="javascript:void(0);" class="pure-menu-link"><span class="note-label-work"></span>Work</a></li>
+                    <li class="pure-menu-item"><a href="javascript:void(0);" class="pure-menu-link"><span class="note-label-travel"></span>Travel</a></li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="list" class="pure-u-1">
+        <div class="note-item-search">
+            <form action="/search.html" id="search" accept-charset="utf-8" class="pure-form" style="text-align: center;width: 100%">
+                <input type="text" id="tipue_search_input" class="pure-input-rounded pure-input-1" placeholder="好记性不如烂键盘" name="q">
+            </form>
+        </div>
+
+        <div class="note-item-body">
+            {% block item %}
+            {% endblock item %}
+        </div>
+    </div>
+
+    <div id="main" class="pure-u-1">
+            {% block content %}
+            {% endblock content %}
+    </div>
+</div>
+
+<nav class="mobile-bottom-nav">
+    <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+        <div class="mobile-bottom-nav__item-content">
+            <i class="fa fa-list"></i>
+            最近
+        </div>
+    </div>
+    <div class="mobile-bottom-nav__item">
+        <div class="mobile-bottom-nav__item-content">
+            <i class="fa fa-folder"></i>
+            文件夹
+        </div>
+    </div>
+    <div class="mobile-bottom-nav__item">
+        <div class="mobile-bottom-nav__item-content">
+            <div id="search-icon">
+                <div id="circle-big" class="circle"></div>
+                <div id="circle-small" class="circle">
+                    <div id="line-left" class="line"></div>
+                    <div id="line-right" class="line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-bottom-nav__item">
+        <div class="mobile-bottom-nav__item-content">
+            <i class="fa fa-tags"></i>
+            标签
+        </div>
+    </div>
+    <div class="mobile-bottom-nav__item">
+        <div class="mobile-bottom-nav__item-content">
+            <i class="fa fa-user"></i>
+            个人
+        </div>
+    </div>
+</nav>
+
+<!-- <script src="https://yui-s.yahooapis.com/3.18.1/build/yui/yui-min.js"></script> -->
+<script src="/{{ THEME_STATIC_DIR }}/js/index.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ SITEURL }}/theme/tipuesearch/tipuesearch_set.js"></script>
+<script type="text/javascript" src="{{ SITEURL }}/tipuesearch_content.js"></script>
+<script type="text/javascript" src="{{ SITEURL }}/theme/tipuesearch/tipuesearch.min.js"></script>
+<!-- <script>
+    YUI().use('node-base', 'node-event-delegate', function (Y) {
+
+        var menuButton = Y.one('.nav-menu-button'),
+            nav        = Y.one('#nav');
+
+        // Setting the active class name expands the menu vertically on small screens.
+        menuButton.on('click', function (e) {
+            nav.toggleClass('active');
+        });
+
+        // Your application code goes here...
+
+    });
+</script> -->
+
+<script>
+$(document).ready(function(){
+  $(".note-item-body a").click(function(e){
+      e.preventDefault(); // not refresh
+    // load the .note-content-header, .note-content-body for main
+      $('#main').load($(this).attr('href') + " .note-content-header, .note-content-body");
+  });
+});
+
+$(document).ready(function(){
+    $('#tipue_search_input').tipuesearch();
+    // select the first tipue search result
+    var searchResult = document.querySelector("div.tipue_search_result")
+    $('#main').load(searchResult.querySelector("a[href]") + " .note-content-header, .note-content-body");
+});
+
+// select the first note item and add the .note-item-selected
+// var noteItem = document.querySelector("div.note-item")
+// noteItem.classList.add("note-item-selected")
+$('#main').load(document.querySelector("div.note-item a[href]") + " .note-content-header, .note-content-body");
+
+var navItems = document.querySelectorAll("div.note-item");
+navItems.forEach(function (e, i) {
+    e.addEventListener("click", function (e) {
+        navItems.forEach(function (e2, i2) {
+            e2.classList.remove("note-item-selected");
+        })
+        this.classList.add("note-item-selected");
+    });
+});
+</script>
+
+</body>
+</html>

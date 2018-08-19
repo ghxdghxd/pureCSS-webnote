@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Archive | {{ SITENAME }}{% endblock title %}
+
+{% block item %}
+{% for article in articles %}
+<div class="note-item pure-g">
+    <div class="pure-u">
+        <img width="64" height="64" alt="{{article.category}}" class="note-avatar" src="/{{ THEME_STATIC_DIR }}/img/{{article.category}}.png">
+    </div>
+
+    <div class="pure-u-3-4">
+        <h5 class="note-name">{{ article.date|strftime('%Y/%m/%d') }}</h5>
+        <h4 class="note-subject">{{ article.title}}</h4>
+        <p class="note-desc">{{ article.summary}}</p>
+    </div>
+</div>
+{% endfor %}
+{% endblock item %}
