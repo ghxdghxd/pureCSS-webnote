@@ -7,23 +7,35 @@
     <title>{{SITENAME}}</title>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/note.css">
+    <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/modal.css">
     <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/totop.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
     <link href="/{{ THEME_STATIC_DIR }}/tipuesearch/css/tipuesearch.css" rel="stylesheet">
 </head>
 <body>
-
-<form id="full-search" action="/search.html" accept-charset="utf-8" >
-    <input type="text" id="tipue_search_input" placeholder="好记性不如烂键盘" name="q" autocomplete="off">
-</form>
-
 <div id="layout" class="content pure-g">
     <div id="nav" class="pure-u">
-        <a href="javascript:void(0);" class="nav-menu-button">Menu</a>
-
+        <!-- <a href="javascript:void(0);" class="nav-menu-button">Menu</a> -->
+        <h3><a href="/" class="site-name">{{SITENAME}}</a></h3>
         <div class="nav-inner">
-            <button class="primary-button pure-button">Compose</button>
+            <div class="site-logo">
+                <div class="user-pic pure-img">
+                    <img class="img-responsive img-rounded" src="/theme/img/Logo.jpg" alt="User picture" style="border-radius: 50%">
+                </div>
+                <div class="user-info">
+                    <span class="user-name">
+                        <strong>{{AUTHOR}}</strong>
+                    </span>
+                    <span class="user-role">Bioinformatist</span>
+                    <span class="user-status">
+                        <i class="fa fa-circle"></i>
+                        <span>Online</span>
+                    </span>
+                </div>
+            </div>
+            
+            <!-- <button class="primary-button pure-button">Compose</button> -->
 
             <div class="pure-menu">
                 <ul class="pure-menu-list">
@@ -48,13 +60,17 @@
     </div>
 
     <div id="list" class="pure-u-1">
+        <div>
+            <form id="full-search" action="/search.html" accept-charset="utf-8" >
+                <input type="text" id="tipue_search_input" placeholder="好记性不如烂键盘" name="q" autocomplete="off">
+            </form>
+        </div>
         <div class="note-item-search">
             <form action="/search.html" id="search" accept-charset="utf-8" class="pure-form" style="text-align: center;width: 100%">
                 <input type="text" id="tipue_search_input" class="pure-input-rounded pure-input-1" placeholder="好记性不如烂键盘" name="q" autocomplete="off" 
                     style="padding-left: 15%;">
             </form>
         </div>
-
         <div class="note-item-body">
             {% block item %}
             {% endblock item %}
@@ -67,11 +83,15 @@
     </div>
 </div>
 
+<div id="new"></div>
+
 <nav class="mobile-bottom-nav">
     <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
         <div class="mobile-bottom-nav__item-content">
-            <i class="fa fa-list"></i>
-            最近
+            <a href="/archives.html" style="display: contents;">
+                <i class="fa fa-list"></i>
+                最近
+            </a>
         </div>
     </div>
     <div class="mobile-bottom-nav__item">
@@ -100,8 +120,10 @@
     </div>
     <div class="mobile-bottom-nav__item">
         <div class="mobile-bottom-nav__item-content">
-            <i class="fa fa-user"></i>
-            个人
+            <a href="/pages/about.html" style="display: contents;">
+                <i class="fa fa-user"></i>
+                个人
+            </a>
         </div>
     </div>
 </nav>
@@ -111,6 +133,8 @@
 <script src="/{{ THEME_STATIC_DIR }}/js/totop.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"> -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ SITEURL }}/theme/tipuesearch/tipuesearch_set.js"></script>
 <script type="text/javascript" src="{{ SITEURL }}/tipuesearch_content.js"></script>
 <script type="text/javascript" src="{{ SITEURL }}/theme/tipuesearch/tipuesearch.min.js"></script>
@@ -131,35 +155,41 @@
 </script> -->
 
 <script>
-$(document).ready(function(){
-  $(".note-item-body a").click(function(e){
-      e.preventDefault(); // not refresh
-    // load the .note-content-header, .note-content-body for main
-      $('#main').load($(this).attr('href') + " .note-content-header, .note-content-body");
-  });
-});
+
+function loadnote(element2) // selected the first item and load content
+{
+    if ((screen.width <= 600)){
+        var element1 = "#new"
+    }else{
+        var element1 = "#main"
+        $(element1).load(document.querySelector(element2 + " a[href]") + " .note-content-header, .note-content-body");
+    }
+    var noteItems = document.querySelectorAll(element2);
+    noteItems.forEach(function (e, i) {
+        e.addEventListener("click", function (e) {
+            noteItems.forEach(function (e2, i2) {
+                e2.classList.remove("note-item-selected");
+            })
+            this.classList.add("note-item-selected");
+            $(element1).load(this.querySelector("a[href]") + " .note-content-header, .note-content-body");
+        });
+    });
+    $(".note-item-body a").click(function(e){
+        e.preventDefault(); // not refresh
+      // load the .note-content-header, .note-content-body for main
+        $(element1).load($(this).attr('href') + " .note-content-header, .note-content-body");
+    });
+}
 
 $(document).ready(function(){
     $('#tipue_search_input').tipuesearch();
-    // select the first tipue search result
-    var searchResult = document.querySelector("div.tipue_search_result")
-    $('#main').load(searchResult.querySelector("a[href]") + " .note-content-header, .note-content-body");
+    loadnote("div.tipue_search_result");
 });
 
-// select the first note item and add the .note-item-selected
-$('#main').load(document.querySelector("div.note-item a[href]") + " .note-content-header, .note-content-body");
-
-var navItems = document.querySelectorAll("div.note-item");
-navItems.forEach(function (e, i) {
-    e.addEventListener("click", function (e) {
-        navItems.forEach(function (e2, i2) {
-            e2.classList.remove("note-item-selected");
-        })
-        this.classList.add("note-item-selected");
-        // selected and click the <a>
-        $('#main').load(this.querySelector("a[href]") + " .note-content-header, .note-content-body");
-    });
+$(document).ready(function(){
+    loadnote("div.note-item")
 });
+
 </script>
 {% include "totop.html" %}
 </body>

@@ -1,7 +1,7 @@
-var navItems = document.querySelectorAll(".mobile-bottom-nav__item");
-navItems.forEach(function (e, i) {
+var bottomItems = document.querySelectorAll(".mobile-bottom-nav__item");
+bottomItems.forEach(function (e, i) {
     e.addEventListener("click", function (e) {
-        navItems.forEach(function (e2, i2) {
+        bottomItems.forEach(function (e2, i2) {
             e2.classList.remove("mobile-bottom-nav__item--active");
         })
         this.classList.add("mobile-bottom-nav__item--active");
@@ -16,5 +16,4 @@ document.getElementById("search-icon").onclick = function () {
     document.getElementById("full-search").classList.toggle("change");
     document.getElementById('tipue_search_input').focus();
     // window.setTimeout(function () { document.getElementById('full-search-text').focus(); }, 0);
-}; note - item - selected
-
+}; 

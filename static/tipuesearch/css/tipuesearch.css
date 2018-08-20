@@ -205,6 +205,10 @@ http://www.tipue.com/search
      /* padding-top: 21px; */
      padding: 0.9em 1em;
 }
+.tipue_search_result a
+{
+    display: block;
+}
 #tipue_search_results_count
 {
      padding-top: 9px;
