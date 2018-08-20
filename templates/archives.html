@@ -4,7 +4,11 @@
 
 {% block item %}
 {% for article in articles %}
-<div class="note-item pure-g">
+{% if loop.first %}
+    <div class="note-item pure-g note-item-selected">
+{% else %}
+    <div class="note-item pure-g">
+{% endif %}
     <div class="pure-u">
         <img width="64" height="64" alt="{{article.category}}" class="note-avatar" src="/{{ THEME_STATIC_DIR }}/img/{{article.category}}.png">
     </div>

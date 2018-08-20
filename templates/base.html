@@ -7,16 +7,15 @@
     <title>{{SITENAME}}</title>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/note.css">
+    <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/totop.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
-    {% if 'tipue_search' in PLUGINS %}
     <link href="/{{ THEME_STATIC_DIR }}/tipuesearch/css/tipuesearch.css" rel="stylesheet">
-    {% endif %}
 </head>
 <body>
 
 <form id="full-search" action="/search.html" accept-charset="utf-8" >
-    <input type="text" id="tipue_search_input" placeholder="好记性不如烂键盘" name="q">
+    <input type="text" id="tipue_search_input" placeholder="好记性不如烂键盘" name="q" autocomplete="off">
 </form>
 
 <div id="layout" class="content pure-g">
@@ -51,7 +50,8 @@
     <div id="list" class="pure-u-1">
         <div class="note-item-search">
             <form action="/search.html" id="search" accept-charset="utf-8" class="pure-form" style="text-align: center;width: 100%">
-                <input type="text" id="tipue_search_input" class="pure-input-rounded pure-input-1" placeholder="好记性不如烂键盘" name="q">
+                <input type="text" id="tipue_search_input" class="pure-input-rounded pure-input-1" placeholder="好记性不如烂键盘" name="q" autocomplete="off" 
+                    style="padding-left: 15%;">
             </form>
         </div>
 
@@ -108,6 +108,7 @@
 
 <!-- <script src="https://yui-s.yahooapis.com/3.18.1/build/yui/yui-min.js"></script> -->
 <script src="/{{ THEME_STATIC_DIR }}/js/index.js"></script>
+<script src="/{{ THEME_STATIC_DIR }}/js/totop.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ SITEURL }}/theme/tipuesearch/tipuesearch_set.js"></script>
@@ -146,8 +147,6 @@ $(document).ready(function(){
 });
 
 // select the first note item and add the .note-item-selected
-// var noteItem = document.querySelector("div.note-item")
-// noteItem.classList.add("note-item-selected")
 $('#main').load(document.querySelector("div.note-item a[href]") + " .note-content-header, .note-content-body");
 
 var navItems = document.querySelectorAll("div.note-item");
@@ -157,9 +156,11 @@ navItems.forEach(function (e, i) {
             e2.classList.remove("note-item-selected");
         })
         this.classList.add("note-item-selected");
+        // selected and click the <a>
+        $('#main').load(this.querySelector("a[href]") + " .note-content-header, .note-content-body");
     });
 });
 </script>
-
+{% include "totop.html" %}
 </body>
 </html>
