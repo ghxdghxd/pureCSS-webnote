@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/totop.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="//combo/1.18.13?/css/main-grid.css&amp;/css/main.css&amp;/css/bootstrap/modal.css&amp;/css/rainbow/baby-blue.css"> -->
     <link href="/{{ THEME_STATIC_DIR }}/tipuesearch/css/tipuesearch.css" rel="stylesheet">
 </head>
 <body>
@@ -83,7 +84,18 @@
     </div>
 </div>
 
-<div id="new"></div>
+<!-- <a href="#new" role="button" class="pure-button-primary pure-button" data-toggle="modal" style="float:right;top:0">
+    Launch Pure + Bootstrap Modal
+</a> -->
+
+<div id="new" class="modal hide fade shown.bs.modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-header"></div>
+    <div class="modal-body"></div>
+    <div class="modal-footer">
+        <li class="fa fa-times-circle" data-dismiss="modal" aria-hidden="true"></li>
+    </div>
+</div>
+
 
 <nav class="mobile-bottom-nav">
     <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
@@ -133,8 +145,9 @@
 <script src="/{{ THEME_STATIC_DIR }}/js/totop.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"> -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script> -->
 <script type="text/javascript" src="{{ SITEURL }}/theme/tipuesearch/tipuesearch_set.js"></script>
 <script type="text/javascript" src="{{ SITEURL }}/tipuesearch_content.js"></script>
 <script type="text/javascript" src="{{ SITEURL }}/theme/tipuesearch/tipuesearch.min.js"></script>
@@ -156,28 +169,52 @@
 
 <script>
 
-function loadnote(element2) // selected the first item and load content
+if((screen.width <= 600)){
+    $("body").attr("overflow", "hidden");
+    $("body").attr("position", "fixed");
+    document.querySelectorAll(".note-item-body a").forEach(function(e){
+            $(e).attr("data-toggle", "modal");
+            // $(e).attr("data-target", "#new");
+    });
+}
+
+function loadnote(element3) // selected the first item and load content
 {
     if ((screen.width <= 600)){
-        var element1 = "#new"
+        var element1 = "#new .modal-header"
+        var element2 = "#new .modal-body"
     }else{
         var element1 = "#main"
-        $(element1).load(document.querySelector(element2 + " a[href]") + " .note-content-header, .note-content-body");
+        // load the first item
+        $(element1).load(document.querySelector(element3 + " a[href]") + " .note-content-header, .note-content-body");
     }
-    var noteItems = document.querySelectorAll(element2);
+    var noteItems = document.querySelectorAll(element3);
     noteItems.forEach(function (e, i) {
         e.addEventListener("click", function (e) {
             noteItems.forEach(function (e2, i2) {
                 e2.classList.remove("note-item-selected");
             })
             this.classList.add("note-item-selected");
-            $(element1).load(this.querySelector("a[href]") + " .note-content-header, .note-content-body");
+            if ((screen.width <= 600)) {
+                $(element1).load(this.querySelector("a[href]") + " .note-content-header");
+                $(element2).load(this.querySelector("a[href]") + " .note-content-body");
+                $('#new').modal('show');
+            }else{
+                $(element1).load(this.querySelector("a[href]") + " .note-content-header, .note-content-body");
+            }
         });
     });
     $(".note-item-body a").click(function(e){
         e.preventDefault(); // not refresh
       // load the .note-content-header, .note-content-body for main
-        $(element1).load($(this).attr('href') + " .note-content-header, .note-content-body");
+        // $(element1).load($(this).attr('href') + " .note-content-header, .note-content-body");
+        if ((screen.width <= 600)) {
+            $(element1).load($(this).attr('href') + " .note-content-header");
+            $(element2).load($(this).attr('href') + " .note-content-body");
+            $('#new').modal('show')
+        }else{
+            $(element1).load($(this).attr('href') + " .note-content-header, .note-content-body");
+        }
     });
 }
 
@@ -188,6 +225,14 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     loadnote("div.note-item")
+});
+
+$('.modal').on('shown.bs.modal', function(){
+    var margin_vertical = parseInt( $(this).find('.modal').css('margin-top') ) + parseInt( $(this).find('.modal').css('margin-bottom') ) || 0;
+    var height_header   = parseInt( $(this).find('.modal-header').css('height') ) || 0;
+    var height_footer   = parseInt( $(this).find('.modal-footer').css('height') ) || 0;
+    var height_body     = ( window.innerHeight - height_header - height_footer - margin_vertical) + 'px';
+    $(this).find('.modal-body').css('max-height', height_body).css('overflow', 'auto');
 });
 
 </script>

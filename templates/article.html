@@ -7,7 +7,7 @@
     <div class="pure-u-1-2">
         <h1 class="note-content-title">{{ article.title }}</h1>
         <div class="note-content-subtitle">
-            {{ article.date|strftime('%b %d, %Y') }}
+            {{ article.date|strftime('%Y %b%d') }}
             {% if category %}
             <span> | </span> <a href="/{{ category.url }}">{{ category }}</a>
             {% endif %}
