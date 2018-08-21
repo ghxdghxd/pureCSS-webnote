@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block item %}
-
+<div class="note-item-body">
 {% for article in articles %}
 <!-- <div onclick="window.open('/{{ article.url }}','_self')" class="note-item pure-g"> -->
     {% if loop.first %}
@@ -19,5 +19,5 @@
     </div>
 </div>
 {% endfor %}
-
+</div>
 {% endblock item %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Categories | {{ SITENAME }}{% endblock title %}
+
+{% block item %}
+<ul id="accordion" class="accordion">
+     {% for category, articles in categories %}
+    <li>
+        <div class="link">
+            <span class="fa fa-folder fa-fw"></span>
+            <span>{{ category }}</span>
+            <span class="fa fa-chevron-right"></span>
+        </div>
+        <div class="submenu">
+             {% for article in articles %}
+            <a href="/{{ article.url }}">{{ article.title }}</a>
+             {% endfor %}
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock item %}
+
+
+
+

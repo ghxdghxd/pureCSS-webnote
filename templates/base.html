@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/note.css">
     <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/modal.css">
     <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/totop.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-        crossorigin="anonymous">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="//combo/1.18.13?/css/main-grid.css&amp;/css/main.css&amp;/css/bootstrap/modal.css&amp;/css/rainbow/baby-blue.css"> -->
     <link href="/{{ THEME_STATIC_DIR }}/tipuesearch/css/tipuesearch.css" rel="stylesheet">
 </head>
@@ -72,15 +71,15 @@
                     style="padding-left: 15%;">
             </form>
         </div>
-        <div class="note-item-body">
-            {% block item %}
-            {% endblock item %}
-        </div>
+        <!-- <div class="note-item-body"></div> -->
+        <!-- <div class="tree"></div> -->
+        {% block item %}
+        {% endblock item %}
     </div>
 
     <div id="main" class="pure-u-1">
-            {% block content %}
-            {% endblock content %}
+        {% block content %}
+        {% endblock content %}
     </div>
 </div>
 
@@ -108,8 +107,10 @@
     </div>
     <div class="mobile-bottom-nav__item">
         <div class="mobile-bottom-nav__item-content">
-            <i class="fa fa-folder"></i>
-            文件夹
+            <a href="/categories.html" style="display: contents;">
+                <i class="fa fa-folder"></i>
+                 文件夹
+            </a>
         </div>
     </div>
     <div class="mobile-bottom-nav__item">
@@ -146,8 +147,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
 <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"> -->
-<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script> -->
 <script type="text/javascript" src="{{ SITEURL }}/theme/tipuesearch/tipuesearch_set.js"></script>
 <script type="text/javascript" src="{{ SITEURL }}/tipuesearch_content.js"></script>
 <script type="text/javascript" src="{{ SITEURL }}/theme/tipuesearch/tipuesearch.min.js"></script>
@@ -204,7 +203,7 @@ function loadnote(element3) // selected the first item and load content
             }
         });
     });
-    $(".note-item-body a").click(function(e){
+    $(".note-item a").click(function(e){
         e.preventDefault(); // not refresh
       // load the .note-content-header, .note-content-body for main
         // $(element1).load($(this).attr('href') + " .note-content-header, .note-content-body");
@@ -234,6 +233,33 @@ $('.modal').on('shown.bs.modal', function(){
     var height_body     = ( window.innerHeight - height_header - height_footer - margin_vertical) + 'px';
     $(this).find('.modal-body').css('max-height', height_body).css('overflow', 'auto');
 });
+
+    $(function () {
+        var Accordion = function (el, multiple) {
+            this.el = el || {};
+            this.multiple = multiple || false;
+
+            // Variables privadas
+            var links = this.el.find('.link');
+            // Evento
+            links.on('click', { el: this.el, multiple: this.multiple }, this.dropdown)
+        }
+
+        Accordion.prototype.dropdown = function (e) {
+            var $el = e.data.el;
+            $this = $(this),
+                $next = $this.next();
+
+            $next.slideToggle();
+            $this.parent().toggleClass('open');
+
+            if (!e.data.multiple) {
+                $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+            };
+        }
+
+        var accordion = new Accordion($('#accordion'), false);
+    });
 
 </script>
 {% include "totop.html" %}
