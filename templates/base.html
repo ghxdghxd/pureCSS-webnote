@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/modal.css">
     <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/totop.css">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="//combo/1.18.13?/css/main-grid.css&amp;/css/main.css&amp;/css/bootstrap/modal.css&amp;/css/rainbow/baby-blue.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link href="/{{ THEME_STATIC_DIR }}/tipuesearch/css/tipuesearch.css" rel="stylesheet">
 </head>
 <body>
@@ -234,6 +234,19 @@ $('.modal').on('shown.bs.modal', function(){
     $(this).find('.modal-body').css('max-height', height_body).css('overflow', 'auto');
 });
 
+
+// var links = document.querySelectorAll("div.link");
+// links.forEach(function (e, i) {
+//     e.addEventListener("click", function (e) {
+//         links.forEach(function (e2, i2) {
+//             e2.parentNode.classList.remove("open");
+//         })
+//         this.parentNode.classList.add("open");
+//         this.nextSibling.attr("display","block");
+//     });
+// });
+
+    // dorpdown categories
     $(function () {
         var Accordion = function (el, multiple) {
             this.el = el || {};

@@ -363,8 +363,8 @@ a {
     background: url("dotted-border.png") repeat-x scroll left bottom transparent;
 }
 .note-item:hover{
-    /* background: #eee; */
-    border-left: 6px solid #1b98f8;
+    background: #eee;
+    /* border-left: 6px solid #1b98f8; */
 }
 .note-item a{
     display: block;
@@ -388,7 +388,6 @@ a {
     }
 
 .note-item-selected {
-    background: #eee;
     border-left: 6px solid #1b98f8;
 }
 /* .note-item-unread {
@@ -577,8 +576,9 @@ a {
 ul { list-style-type: none; }
 
 .accordion {
-  margin: 30px auto 3em 0;
-  /* margin: 0 0 3em 0; */
+  /* margin: 30px auto 3em 0; */
+  margin: 0 0 3em 0;
+  padding: 0;
   background: #FFF;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -598,15 +598,51 @@ ul { list-style-type: none; }
     transition: all 0.4s ease;
     align-items: center;
     height: 3em;
-    padding: 0 2em;
+    padding: 0 0 0 3em;
+}
+
+.accordion .link::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f07b";
+    display: inline-block;
+    vertical-align:middle;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    background: 0 0;
+    position: absolute;
+    left: 1em;
+    top: auto;
+}
+
+.accordion .link::after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f054";
+    display: inline-block;
+    vertical-align:middle;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    background: 0 0;
+    position: absolute;
+    right: 1em;
+    top: auto;
 }
 
 /* .accordion li:last-child .link { border-bottom: 0; } */
 
 .accordion li i {
-  position: absolute;
+  /* position: absolute;
   top: 16px;
-  left: 12px;
+  left: 12px; */
   font-size: 18px;
   color: #595959;
   -webkit-transition: all 0.4s ease;
@@ -614,7 +650,13 @@ ul { list-style-type: none; }
   transition: all 0.4s ease;
 }
 
-.accordion li i.fa-chevron-right {
+.accordion li {
+  right: 12px;
+  left: auto;
+  font-size: 16px;
+}
+
+.fa-chevron-right {
   right: 12px;
   left: auto;
   font-size: 16px;
@@ -624,7 +666,11 @@ ul { list-style-type: none; }
 
 .accordion li.open i { color: #0089e0; }
 
-.accordion li.open i.fa-chevron-right {
+.accordion li.open .link::before{
+    content: "\f07c";
+}
+
+.accordion li.open .link::after{
   -webkit-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   -o-transform: rotate(90deg);
@@ -638,8 +684,8 @@ ul { list-style-type: none; }
 .submenu {
   display: none;
   /* background: #444359; */
-  font-size: 14px;
-  border-bottom: 1px solid #4b4a5e;
+  font-size: 18px;
+  
 }
 
 .submenu :hover{
@@ -647,15 +693,37 @@ ul { list-style-type: none; }
 }
 
 .submenu a {
-  display: block;
+  display: flex;
   text-decoration: none;
   color: #444359;
-  padding: 12px;
-  padding-left: 5em;
+  align-items: center;
+  padding-left: 3em;
   -webkit-transition: all 0.25s ease;
   -o-transition: all 0.25s ease;
   transition: all 0.25s ease;
+  height: 3em;
+  background: url("dotted-border.png") repeat-x scroll left bottom transparent;
 }
+
+/* .submenu a::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content:"\f15c";
+    display: inline-block;
+    vertical-align:middle;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    background: 0 0;
+    position: absolute;
+    left: 4em;
+    top: auto;
+} */
+
+.submenu:last-child { border-bottom: 0; }
 
 /* .submenu a:hover {
   background: #0089e0;
