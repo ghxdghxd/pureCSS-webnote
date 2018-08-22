@@ -4,17 +4,17 @@
 
 {% block content %}
 <div class="note-content-header pure-g">
-    <div class="pure-u-1-2">
+    <div class="pure-u-2-3">
         <h1 class="note-content-title">{{ article.title }}</h1>
         <div class="note-content-subtitle">
-            {{ article.date|strftime('%Y %b%d') }}
+             {{ article.date|strftime('%b %d, %Y') }}
             {% if category %}
             <span> | </span> <a href="/{{ category.url }}">{{ category }}</a>
             {% endif %}
         </div>
     </div>
 
-    <div class="note-content-controls pure-u-1-2 tags">
+    <div class="note-content-controls pure-u-1-3 tags">
         {% for tag in article.tags %}
         <a href="/{{ tag.url }}" class="tag"> {{ tag }}</a>
         {% endfor %}

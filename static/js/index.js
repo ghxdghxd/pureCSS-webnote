@@ -1,4 +1,4 @@
-var bottomItems = document.querySelectorAll(".mobile-bottom-nav__item");
+var bottomItems = document.querySelectorAll("div.mobile-bottom-nav__item");
 bottomItems.forEach(function (e, i) {
     e.addEventListener("click", function (e) {
         bottomItems.forEach(function (e2, i2) {
@@ -17,3 +17,4 @@ document.getElementById("search-icon").onclick = function () {
     document.getElementById('tipue_search_input').focus();
     // window.setTimeout(function () { document.getElementById('full-search-text').focus(); }, 0);
 }; 
+

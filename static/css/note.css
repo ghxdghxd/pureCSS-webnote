@@ -416,7 +416,15 @@ a {
             font-size: 1em;
             margin: 0;
             font-weight: normal;
+            display: flex;
+            align-items: center;
         }
+
+        .note-content-subtitle::before {
+                font-family: "FontAwesome";
+                content: "\f073";
+                padding-right: 0.3em;
+            }
             .note-content-subtitle span {
                 color: #999;
             }
@@ -490,6 +498,27 @@ a {
 
 .tags a:hover{background:#555;}	
 .tags a:hover:before{border-color:transparent #555 transparent transparent;}
+
+#tag-cloud {
+    /* padding: 1em; */
+    margin: 2em auto;
+    width: 90%;
+    list-style: none;
+    font: 100% Arial, sans-serif;
+    border: none;
+    line-height: 2;
+}
+
+#tag-cloud li {
+  display: inline;
+  text-transform: lowercase;
+  padding: 0 1em;
+}
+
+#tag-cloud li a {
+   text-decoration: none;
+   position: relative;
+}
 
 /* Scrollbar Styles */
 ::-webkit-scrollbar {
@@ -808,6 +837,10 @@ ul { list-style-type: none; }
         padding: 0;
     }
     .accordion {
+        margin: 7em 0 0 0;
+        padding: 0;
+    }
+    #tag-cloud{
         margin: 7em 0 0 0;
         padding: 0;
     }

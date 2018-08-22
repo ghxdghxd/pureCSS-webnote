@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category }} | {{ SITENAME }}{% endblock title %}
+
+{% block content %}
+<div class="post"><div class="post-archive">
+<h1 class="post-title">分类<em>{{ category }}的文件列表</em></h1>
+{% for article in articles %}
+<div class="recent-post-header">
+    <h4><li>
+        <span class="date">{{ article.date|strftime('%Y/%m/%d') }}</span>
+        <a class="header-link" href="{{ SITEURL }}/{{ article.url }}">
+            {{article.title}}
+            <span class="link">&raquo;</span>
+        </a>
+        </li>
+    </h4>
+    <div class="tags">
+        {% for tag in article.tags %}
+        <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+</div></div>
+{% endblock content %}
