@@ -217,6 +217,18 @@ function loadnote(element3) // selected the first item and load content
             $(element1).load($(this).attr('href') + " .note-content-header, .note-content-body");
         }
     });
+    $(".tipue_search_result a").click(function(e){
+        e.preventDefault(); // not refresh
+      // load the .note-content-header, .note-content-body for main
+        // $(element1).load($(this).attr('href') + " .note-content-header, .note-content-body");
+        if ((screen.width <= 600)) {
+            $(element1).load($(this).attr('href') + " .note-content-header");
+            $(element2).load($(this).attr('href') + " .note-content-body");
+            $('#new').modal('show')
+        }else{
+            $(element1).load($(this).attr('href') + " .note-content-header, .note-content-body");
+        }
+    });
     $(".submenu a").click(function(e){
         e.preventDefault(); // not refresh
       // load the .note-content-header, .note-content-body for main

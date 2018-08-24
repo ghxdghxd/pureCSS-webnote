@@ -198,7 +198,13 @@ http://www.tipue.com/search
 #tipue_search_content
 {
      max-width: 100%;
-	margin: 0;
+	margin: 0 0 3em 0;
+}
+@media (min-width: 40em) {
+    #tipue_search_content
+    {
+        margin: 7em 0 0 0;
+    }
 }
 .tipue_search_result
 {
